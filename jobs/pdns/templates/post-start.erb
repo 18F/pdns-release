@@ -31,3 +31,5 @@ pdnsutil --config-dir="$JOB_DIR/etc" remove-zone-key "<%= zone["zone"] %>" "$CSK
 pdnsutil --config-dir="$JOB_DIR/etc" rectify-zone "<%= zone["zone"] %>"
 
 <% end %>
+
+echo 'completed configuring keys'

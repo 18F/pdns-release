@@ -7,6 +7,7 @@ PACKAGE_DIR="/var/vcap/packages/$JOB_NAME"
 
 export PATH="${PATH}:${PACKAGE_DIR}/bin"
 
+<% if p("dnssec.enabled") %>
 <% p("dnssec.zones").each do |zone| %>
 # Secure the zone
 pdnsutil --config-dir="$JOB_DIR/etc" secure-zone "<%= zone["zone"] %>" || true
@@ -31,3 +32,6 @@ pdnsutil --config-dir="$JOB_DIR/etc" remove-zone-key "<%= zone["zone"] %>" "$CSK
 pdnsutil --config-dir="$JOB_DIR/etc" rectify-zone "<%= zone["zone"] %>"
 
 <% end %>
+<% end %>
+
+echo 'completed configuring keys'
